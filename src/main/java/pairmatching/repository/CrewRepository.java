@@ -1,5 +1,6 @@
 package pairmatching.repository;
 
+import pairmatching.domain.Course;
 import pairmatching.domain.Crew;
 import pairmatching.domain.NameList;
 
@@ -7,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class CrewRepository {
 
@@ -36,5 +38,12 @@ public class CrewRepository {
 
     public List<Crew> findAll() {
         return new ArrayList<>(store.values());
+    }
+
+    public List<Crew> findByCourse(Course course) {
+        return store.values()
+                .stream()
+                .filter(crew -> crew.getCourse() == course)
+                .collect(Collectors.toList());
     }
 }
