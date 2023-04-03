@@ -28,8 +28,6 @@ public class MissionRepository {
         return mission;
     }
 
-
-
     public Optional<Mission> findByLevelAndName(Level level, String name) {
         return store.values()
                 .stream()
