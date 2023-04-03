@@ -52,6 +52,13 @@ public class PairMatchingService {
         return matchingResultRepository.findByCourseAndLevelAndMission(course, level, mission);
     }
 
+    /**
+     * 핵심 기능 3 : 페어 초기화
+     */
+    public void resetPair() {
+        matchingResultRepository.clearStore();
+    }
+
     private void recordMatchingResult(MatchingResult matchingResult) {
         matchingResultRepository.save(matchingResult);
     }
