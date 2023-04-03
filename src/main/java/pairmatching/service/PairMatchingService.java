@@ -41,6 +41,17 @@ public class PairMatchingService {
         return Optional.of(matchingResult);
     }
 
+    /**
+     * 핵심 기능 2 : 페어 조회
+     * @param course 코스(백엔드, 프론트엔드)
+     * @param level 레벨(LEVEL1, LEVEL2 ...)
+     * @param mission 미션(자동차경주, 숫자야구게임 ...)
+     * @return 해당 코스, 레벨, 미션에 따른 이전에 매칭된 결과를 반환합니다.
+     */
+    public Optional<MatchingResult> findPair(Course course, Level level, Mission mission) {
+        return matchingResultRepository.findByCourseAndLevelAndMission(course, level, mission);
+    }
+
     private void recordMatchingResult(MatchingResult matchingResult) {
         matchingResultRepository.save(matchingResult);
     }

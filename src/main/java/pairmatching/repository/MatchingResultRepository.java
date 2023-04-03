@@ -1,6 +1,7 @@
 package pairmatching.repository;
 
 import pairmatching.domain.Course;
+import pairmatching.domain.Level;
 import pairmatching.domain.MatchingResult;
 import pairmatching.domain.Mission;
 
@@ -18,10 +19,11 @@ public class MatchingResultRepository {
         return matchingResult;
     }
 
-    public Optional<MatchingResult> findByCourseAndMission(Course course, Mission mission) {
+    public Optional<MatchingResult> findByCourseAndLevelAndMission(Course course, Level level, Mission mission) {
         return store.values()
                 .stream()
                 .filter(matchingResult -> matchingResult.getCourse().equals(course)
+                                        && matchingResult.getLevel().equals(level)
                                         && matchingResult.getMission().equals(mission))
                 .findAny();
     }
