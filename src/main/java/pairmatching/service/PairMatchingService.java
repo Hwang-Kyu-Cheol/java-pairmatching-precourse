@@ -36,7 +36,7 @@ public class PairMatchingService {
             return Optional.empty();
         }
         recordPairHistory(pairList, level);
-        MatchingResult matchingResult = new MatchingResult(course, mission, pairList);
+        MatchingResult matchingResult = new MatchingResult(course, level, mission, pairList);
         recordMatchingResult(matchingResult);
         return Optional.of(matchingResult);
     }

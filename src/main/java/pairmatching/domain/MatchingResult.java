@@ -4,11 +4,13 @@ import java.util.List;
 
 public class MatchingResult {
     private Course course;
+    private Level level;
     private Mission mission;
     private List<Pair> pairList;
 
-    public MatchingResult(Course course, Mission mission, List<Pair> pairList) {
+    public MatchingResult(Course course, Level level, Mission mission, List<Pair> pairList) {
         this.course = course;
+        this.level = level;
         this.mission = mission;
         this.pairList = pairList;
     }
