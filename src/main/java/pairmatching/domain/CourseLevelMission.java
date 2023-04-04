@@ -2,12 +2,12 @@ package pairmatching.domain;
 
 public class CourseLevelMission {
     private Course course;
-    private Level leve;
+    private Level level;
     private Mission mission;
 
     public CourseLevelMission(Course course, Level leve, Mission mission) {
         this.course = course;
-        this.leve = leve;
+        this.level = leve;
         this.mission = mission;
     }
 
@@ -15,8 +15,8 @@ public class CourseLevelMission {
         return course;
     }
 
-    public Level getLeve() {
-        return leve;
+    public Level getLevel() {
+        return level;
     }
 
     public Mission getMission() {
