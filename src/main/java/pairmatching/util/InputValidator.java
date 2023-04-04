@@ -14,43 +14,47 @@ public class InputValidator {
     private final MissionRepository missionRepository;
     private static final List<String> validSelectingFunctionInputList = new ArrayList<>(Arrays.asList("1", "2", "3", "Q"));
     private static final List<String> validSelectingRematchInputList = new ArrayList<>(Arrays.asList("네", "아니오"));
+    private static final String delimiter = ", ";
 
     public InputValidator(MissionRepository missionRepository) {
         this.missionRepository = missionRepository;
     }
 
     /**
-     * 문자열이 "1","2","3","Q"인지 판단하고, 아닐 경우 예외를 던집니다.
+     * 문자열이 "1","2","3","Q"인지 판단합니다.
      * @param input
-     * @throws IllegalArgumentException
+     * @return 문자열이 유효할 경우 true를, 아닐 경우 false를 반환합니다.
      */
-    public void validateSelectingFunctionInput(String input) throws IllegalArgumentException {
-        if (!validSelectingFunctionInputList.contains(input)) {
-            throw new IllegalArgumentException();
+    public boolean isValidSelectingFunctionInput(String input) {
+        if (validSelectingFunctionInputList.contains(input)) {
+            return true;
         }
+        return false;
     }
 
     /**
-     * 문자열이 "(코스), (레벨), (미션)"인지 판단하고, 아닐 경우 예외를 던집니다.
+     * 문자열이 "(코스), (레벨), (미션)"인지 판단합니다.
      * @param input
-     * @throws IllegalArgumentException
+     * @return 문자열이 유효할 경우 true를, 아닐 경우 false를 반환합니다.
      */
-    public void validateSelectingCourseLevelMissionInput(String input) throws IllegalArgumentException {
+    public boolean isValidSelectingCourseLevelMissionInput(String input) {
         List<String> tokenList = splitByDelimiter(input);
-        if (!isValidTokenList(tokenList)) {
-            throw new IllegalArgumentException();
+        if (isValidTokenList(tokenList)) {
+            return true;
         }
+        return false;
     }
 
     /**
      * 문자열이 "네","아니오"인지 판단하고, 아닐 경우 예외를 던집니다.
      * @param input
-     * @throws IllegalArgumentException
+     * @return 문자열이 유효할 경우 true를, 아닐 경우 false를 반환합니다.
      */
-    public void validateSelectingRematchInput(String input) throws IllegalArgumentException {
-        if (!validSelectingRematchInputList.contains(input)) {
-            throw new IllegalArgumentException();
+    public boolean isValidSelectingRematchInput(String input) throws IllegalArgumentException {
+        if (validSelectingRematchInputList.contains(input)) {
+            return true;
         }
+        return false;
     }
 
     private boolean isValidTokenList(List<String> tokenList) {
@@ -67,6 +71,6 @@ public class InputValidator {
     }
 
     private List<String> splitByDelimiter(String input) {
-        return Arrays.asList(input.split(", "));
+        return Arrays.asList(input.split(delimiter));
     }
 }

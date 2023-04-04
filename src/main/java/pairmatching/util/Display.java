@@ -14,7 +14,7 @@ public class Display {
         System.out.println("Q. 종료");
     }
 
-    public static void displaySelectingCourseLevelMission() {
+    public static void displayCourseLevelMission() {
         System.out.println("#############################################");
         System.out.println("과정: 백엔드 | 프론트엔드");
         System.out.println("미션:");
@@ -24,6 +24,9 @@ public class Display {
         System.out.println("- 레벨4: 성능개선 | 배포");
         System.out.println("- 레벨5: ");
         System.out.println("############################################");
+    }
+
+    public static void displaySelectingCourseLevelMission() {
         System.out.println("과정, 레벨, 미션을 선택하세요.");
         System.out.println("ex) 백엔드, 레벨1, 자동차경주");
     }
@@ -43,6 +46,10 @@ public class Display {
 
     public static void displayResetting() {
         System.out.println("초기화 되었습니다.");
+    }
+
+    public static void displayInputError() {
+        System.out.println("[ERROR] 입력이 올바르지 않습니다.");
     }
 
     private static void displayPair(Pair pair) {
