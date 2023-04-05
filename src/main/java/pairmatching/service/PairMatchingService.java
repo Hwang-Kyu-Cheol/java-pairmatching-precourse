@@ -80,8 +80,8 @@ public class PairMatchingService {
             Crew self = pair.get(i);
             for (int j = i + 1; j < pair.size(); j++) {
                 Crew other = pair.get(j);
-                PairHistory pairHistory = new PairHistory(level, self, other);
-                pairHistoryRepository.save(pairHistory);
+                pairHistoryRepository.save(new PairHistory(level, self, other));
+                pairHistoryRepository.save(new PairHistory(level, other, self));
             }
         }
     }
