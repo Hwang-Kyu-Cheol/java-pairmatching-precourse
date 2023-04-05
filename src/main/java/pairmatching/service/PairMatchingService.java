@@ -38,7 +38,7 @@ public class PairMatchingService {
             }
             recordPairHistory(pairList, level);
             MatchingResult matchingResult = new MatchingResult(course, level, mission, pairList);
-            recordMatchingResult(matchingResult);
+            recordMatchingResult(course, level, mission, matchingResult);
             return Optional.of(matchingResult);
         }
         return Optional.empty();
@@ -62,7 +62,11 @@ public class PairMatchingService {
         matchingResultRepository.clearStore();
     }
 
-    private void recordMatchingResult(MatchingResult matchingResult) {
+    private void recordMatchingResult(Course course, Level level, Mission mission, MatchingResult matchingResult) {
+        if (matchingResultRepository.findByCourseAndLevelAndMission(course, level, mission).isPresent()) {
+            matchingResultRepository.updateByCourseAndLevelAndMission(course, level, mission, matchingResult);
+            return;
+        }
         matchingResultRepository.save(matchingResult);
     }
 

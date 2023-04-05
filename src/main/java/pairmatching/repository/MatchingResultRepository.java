@@ -28,6 +28,16 @@ public class MatchingResultRepository {
                 .findAny();
     }
 
+    public void updateByCourseAndLevelAndMission(Course course, Level level, Mission mission, MatchingResult matchingResult) {
+        store.keySet()
+                .stream()
+                .filter(key -> store.get(key).getCourse().equals(course)
+                        && store.get(key).getLevel().equals(level)
+                        && store.get(key).getMission().equals(mission))
+                .findAny()
+                .ifPresent(key -> store.put(key, matchingResult));
+    }
+
     public void clearStore() {
         store.clear();
     }
