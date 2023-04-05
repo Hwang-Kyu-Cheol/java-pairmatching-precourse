@@ -26,19 +26,22 @@ public class PairMatchingService {
      * @param course 코스(백엔드, 프론트엔드)
      * @param level 레벨(LEVEL1, LEVEL2 ...)
      * @param mission 미션(자동차경주, 숫자야구게임 ...)
-     * @return 해당 코스, 레벨, 미션에 따른 매칭 결과를 반환합니다.
+     * @return 해당 코스, 레벨, 미션에 따른 매칭 결과를 반환합니다. 3번까지 매칭되지 않을 경우 Optional.empty()를 반환합니다.
      */
     public Optional<MatchingResult> matchPair(Course course, Level level, Mission mission) {
         List<Crew> crewList = crewRepository.findByCourse(course);
-        List<Crew> shuffledCrewList = shuffleCrewList(crewList);
-        List<Pair> pairList = makePairList(shuffledCrewList);
-        if (!isValidatePairList(pairList, level)) {
-            return Optional.empty();
+        for (int i = 0; i < 3; i++) {
+            List<Crew> shuffledCrewList = shuffleCrewList(crewList);
+            List<Pair> pairList = makePairList(shuffledCrewList);
+            if (!isValidatePairList(pairList, level)) {
+                continue;
+            }
+            recordPairHistory(pairList, level);
+            MatchingResult matchingResult = new MatchingResult(course, level, mission, pairList);
+            recordMatchingResult(matchingResult);
+            return Optional.of(matchingResult);
         }
-        recordPairHistory(pairList, level);
-        MatchingResult matchingResult = new MatchingResult(course, level, mission, pairList);
-        recordMatchingResult(matchingResult);
-        return Optional.of(matchingResult);
+        return Optional.empty();
     }
 
     /**

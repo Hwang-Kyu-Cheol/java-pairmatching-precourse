@@ -37,6 +37,7 @@ public class Display {
             displayPair(pair);
             System.out.println();
         }
+        System.out.println();
     }
 
     public static void displaySelectingRematch() {
@@ -46,10 +47,22 @@ public class Display {
 
     public static void displayResetting() {
         System.out.println("초기화 되었습니다.");
+        System.out.println();
     }
 
     public static void displayInputError() {
         System.out.println("[ERROR] 입력이 올바르지 않습니다.");
+        System.out.println();
+    }
+
+    public static void displayMatchPairError() {
+        System.out.println("[ERROR] 페어를 매칭할 수 없습니다.");
+        System.out.println();
+    }
+
+    public static void displayFindPairError() {
+        System.out.println("[ERROR] 매칭 이력이 없습니다.");
+        System.out.println();
     }
 
     private static void displayPair(Pair pair) {

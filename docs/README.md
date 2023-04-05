@@ -29,6 +29,7 @@
 - - -
 ## 도메인
 * Course
+* CourseLevelMission
 * Crew
 * Level
 * Mission
