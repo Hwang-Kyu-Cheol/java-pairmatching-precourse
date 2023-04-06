@@ -1,8 +1,8 @@
 package pairmatching.repository;
 
-import pairmatching.domain.Course;
+import pairmatching.constant.Course;
 import pairmatching.domain.Crew;
-import pairmatching.domain.NameList;
+import pairmatching.constant.NameList;
 
 import java.io.IOException;
 import java.nio.file.Files;

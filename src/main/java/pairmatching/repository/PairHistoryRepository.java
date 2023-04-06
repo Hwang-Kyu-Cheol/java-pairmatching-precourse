@@ -1,7 +1,7 @@
 package pairmatching.repository;
 
 import pairmatching.domain.Crew;
-import pairmatching.domain.Level;
+import pairmatching.constant.Level;
 import pairmatching.domain.PairHistory;
 
 import java.util.*;

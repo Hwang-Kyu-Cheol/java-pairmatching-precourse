@@ -1,5 +1,8 @@
 package pairmatching.domain;
 
+import pairmatching.constant.Course;
+import pairmatching.constant.Level;
+
 public class CourseLevelMission {
     private Course course;
     private Level level;

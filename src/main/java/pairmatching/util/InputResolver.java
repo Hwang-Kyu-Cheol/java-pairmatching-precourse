@@ -1,8 +1,8 @@
 package pairmatching.util;
 
-import pairmatching.domain.Course;
+import pairmatching.constant.Course;
 import pairmatching.domain.CourseLevelMission;
-import pairmatching.domain.Level;
+import pairmatching.constant.Level;
 import pairmatching.domain.Mission;
 import pairmatching.repository.MissionRepository;
 

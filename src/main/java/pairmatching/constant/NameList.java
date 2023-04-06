@@ -1,4 +1,6 @@
-package pairmatching.domain;
+package pairmatching.constant;
+
+import pairmatching.constant.Course;
 
 public enum NameList {
     FRONTEND_NAMELIST(Course.FRONTEND, "src/main/resources/frontend-crew.md"),

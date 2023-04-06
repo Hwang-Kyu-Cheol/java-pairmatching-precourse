@@ -1,5 +1,8 @@
 package pairmatching.domain;
 
+import pairmatching.constant.Course;
+import pairmatching.constant.Level;
+
 import java.util.List;
 
 public class MatchingResult {

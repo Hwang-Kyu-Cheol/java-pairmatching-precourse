@@ -1,6 +1,6 @@
 package pairmatching.repository;
 
-import pairmatching.domain.Level;
+import pairmatching.constant.Level;
 import pairmatching.domain.Mission;
 
 import java.util.HashMap;

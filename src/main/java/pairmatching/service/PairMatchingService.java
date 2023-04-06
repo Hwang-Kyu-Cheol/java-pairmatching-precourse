@@ -1,6 +1,8 @@
 package pairmatching.service;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import pairmatching.constant.Course;
+import pairmatching.constant.Level;
 import pairmatching.domain.*;
 import pairmatching.repository.CrewRepository;
 import pairmatching.repository.MatchingResultRepository;

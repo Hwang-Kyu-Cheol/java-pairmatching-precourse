@@ -1,5 +1,7 @@
 package pairmatching.domain;
 
+import pairmatching.constant.Level;
+
 public class PairHistory {
     private Level level;
     private Crew self;
