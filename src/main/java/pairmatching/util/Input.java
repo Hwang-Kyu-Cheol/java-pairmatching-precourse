@@ -1,7 +1,6 @@
 package pairmatching.util;
 
 import camp.nextstep.edu.missionutils.Console;
-import pairmatching.domain.CourseLevelMission;
 
 public class Input {
 

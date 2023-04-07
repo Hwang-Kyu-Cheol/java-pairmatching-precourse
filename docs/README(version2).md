@@ -24,3 +24,29 @@
 * 레벨 입력 : [레벨1, 레벨2, ...]
 * 미션 입력 : [자동차경주, 로또, 숫자야구게임, ...]
 * 양자택일 입력 : [예, 아니오]
+- - -
+## Domain
+#### 1. Pair : 두명 또는 세명이 된 페어
+* Field : int MAX_SIZE, List<String> crewNames
+  * maxSize : 2
+  * crewNames : ["백호", "철수"]
+#### 2. MatchingResult : 매칭된 결과
+* Field : Course course, Level level, Mission mission, List<Pair> pairs
+  * course, level, mission : /constant 사용
+  * pairs : 페어 리스트
+- - -
+## Repository
+#### 1. CrewRepository : 크루 저장소
+* Field : Map<Course, List<String>> store
+  * store : 코스(key)에 따라 크루 이름 리스트(value)가 저장되는 공간
+#### 2. MatchingResultRepository : 매칭된 결과 저장소
+* Field : Map<Long, MatchingResult> store, long index
+  * store : index(key)에 따라 매칭된 결과(value)가 저장되는 공간
+- - -
+## Service
+#### 1. PairMatchingService
+* Method : matchPair(Course course, Level level, Mission mission)
+  * matchPair
+    * 설명 : 코스, 레벨, 미션에 따른 매칭된 결과 반환. 
+    3번까지 매칭이 안될 경우 exception 던짐.
+    

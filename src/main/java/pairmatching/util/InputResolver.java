@@ -1,10 +1,7 @@
 package pairmatching.util;
 
 import pairmatching.constant.Course;
-import pairmatching.domain.CourseLevelMission;
 import pairmatching.constant.Level;
-import pairmatching.domain.Mission;
-import pairmatching.repository.MissionRepository;
 
 import java.util.Arrays;
 import java.util.List;

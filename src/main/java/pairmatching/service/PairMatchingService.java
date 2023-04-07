@@ -3,10 +3,10 @@ package pairmatching.service;
 import camp.nextstep.edu.missionutils.Randoms;
 import pairmatching.constant.Course;
 import pairmatching.constant.Level;
+import pairmatching.constant.Mission;
 import pairmatching.domain.*;
 import pairmatching.repository.CrewRepository;
 import pairmatching.repository.MatchingResultRepository;
-import pairmatching.repository.PairHistoryRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,12 +14,11 @@ import java.util.Optional;
 
 public class PairMatchingService {
 
+    private static final int MATCHING_LIMIT = 3;
     private final CrewRepository crewRepository;
-    private final PairHistoryRepository pairHistoryRepository;
     private final MatchingResultRepository matchingResultRepository;
-    public PairMatchingService(CrewRepository crewRepository, PairHistoryRepository pairHistoryRepository, MatchingResultRepository matchingResultRepository) {
+    public PairMatchingService(CrewRepository crewRepository, MatchingResultRepository matchingResultRepository) {
         this.crewRepository = crewRepository;
-        this.pairHistoryRepository = pairHistoryRepository;
         this.matchingResultRepository = matchingResultRepository;
     }
 
@@ -30,12 +29,19 @@ public class PairMatchingService {
      * @param mission 미션(자동차경주, 숫자야구게임 ...)
      * @return 해당 코스, 레벨, 미션에 따른 매칭 결과를 반환합니다. 3번까지 매칭되지 않을 경우 Optional.empty()를 반환합니다.
      */
-    public Optional<MatchingResult> matchPair(Course course, Level level, Mission mission) {
-        List<Crew> crewList = crewRepository.findByCourse(course);
-        for (int i = 0; i < 3; i++) {
-            List<Crew> shuffledCrewList = shuffleCrewList(crewList);
-            List<Pair> pairList = makePairList(shuffledCrewList);
-            if (!isValidatePairList(pairList, level)) {
+    /**
+     * 핵심 기능 1 : 페어 매칭
+     * @param course 코스(백엔드, 프론트엔드)
+     * @param level 레벨(LEVEL1, LEVEL2 ...)
+     * @param mission 미션(자동차경주, 숫자야구게임 ...)
+     * @return 해당 코스, 레벨, 미션에 따른 매칭 결과를 반환합니다.
+     * @throws IllegalStateException 3번까지 매칭되지 않을 경우 예외를 던집니다.
+     */
+    public MatchingResult matchPair(Course course, Level level, Mission mission) throws IllegalStateException {
+        List<String> crewNames = crewRepository.findByCourse(course);
+        for (int i = 0; i < MATCHING_LIMIT; i++) {
+            List<Pair> pairs = makePairs(shuffleCrewNames(crewNames));
+            if (!isValidPairs(level, pairs)) {
                 continue;
             }
             recordPairHistory(pairList, level);
@@ -43,7 +49,7 @@ public class PairMatchingService {
             recordMatchingResult(course, level, mission, matchingResult);
             return Optional.of(matchingResult);
         }
-        return Optional.empty();
+        throw new IllegalStateException();
     }
 
     /**
@@ -72,6 +78,7 @@ public class PairMatchingService {
         matchingResultRepository.save(matchingResult);
     }
 
+    /** 비즈니스 로직 **/
     private void recordPairHistory(List<Pair> pairList, Level level) {
         pairList.stream()
                 .forEach(pair -> recordPair(pair, level));
@@ -88,16 +95,21 @@ public class PairMatchingService {
         }
     }
 
-    private boolean isValidatePairList(List<Pair> pairList, Level level) {
-        for (Pair pair : pairList) {
-            if (!isValidatePair(pair, level)) {
+    private boolean isValidPairs(Level level, List<Pair> pairs) {
+        for (Pair pair : pairs) {
+            if (!isValidPair(level, pair)) {
                 return false;
             }
         }
         return true;
     }
 
-    private boolean isValidatePair(Pair pair, Level level) {
+    private boolean isValidPair(Level level, Pair pair) {
+        List<MatchingResult> matchingResults = matchingResultRepository.findByLevel(level);
+        for (MatchingResult matchingResult : matchingResults) {
+            List<Pair> pairs = matchingResult.getPairs();
+
+        }
         for (int i = 0; i < pair.size(); i++) {
             Crew self = pair.get(i);
             for (int j = i + 1; j < pair.size(); j++) {
@@ -110,23 +122,23 @@ public class PairMatchingService {
         return true;
     }
 
-    private List<Crew> shuffleCrewList(List<Crew> crewList) {
-        return Randoms.shuffle(crewList);
+    private List<String> shuffleCrewNames(List<String> crewNames) {
+        return Randoms.shuffle(crewNames);
     }
 
-    private List<Pair> makePairList(List<Crew> crewList) {
-        List<Pair> pairList = new ArrayList<>();
+    private List<Pair> makePairs(List<String> crewNames) {
+        List<Pair> pairs = new ArrayList<>();
         Pair pair = new Pair();
-        for (Crew crew : crewList) {
-            pair.add(crew);
+        for (String crewName : crewNames) {
+            pair.add(crewName);
             if (pair.isFull()) {
-                pairList.add(pair);
+                pairs.add(pair);
                 pair = new Pair();
             }
         }
         if (!pair.isEmpty()) {
-            pairList.get(pairList.size() - 1).add(pair.get(0));
+            pairs.get(pairs.size() - 1).add(pair.get(0));
         }
-        return pairList;
+        return pairs;
     }
 }

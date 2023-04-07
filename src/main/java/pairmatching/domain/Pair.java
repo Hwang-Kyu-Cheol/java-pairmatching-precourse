@@ -4,34 +4,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Pair {
-    private static final int MAX = 2;
-    private List<Crew> crewList;
+    private static final int MAX_SIZE = 2;
+    private List<String> crewNames;
 
     public Pair() {
-        this.crewList = new ArrayList<>();
+        this.crewNames = new ArrayList<>();
     }
 
-    public void add(Crew crew) {
-        crewList.add(crew);
+    public void add(String crewName) {
+        crewNames.add(crewName);
     }
 
-    public Crew get(int index) {
-        return crewList.get(index);
+    public String get(int index) {
+        return crewNames.get(index);
     }
 
     public int size() {
-        return crewList.size();
+        return crewNames.size();
     }
 
     public boolean isFull() {
-        return crewList.size() == MAX;
+        return crewNames.size() == MAX_SIZE;
     }
 
     public boolean isEmpty() {
-        return crewList.isEmpty();
+        return crewNames.isEmpty();
     }
 
-    public List<Crew> getCrewList() {
-        return crewList;
+    public List<String> getCrewList() {
+        return crewNames;
+    }
+
+    public boolean containsAll(Pair pair) {
+        ArrayList<String> arr = new ArrayList<>();
+        arr.containsAll()
     }
 }

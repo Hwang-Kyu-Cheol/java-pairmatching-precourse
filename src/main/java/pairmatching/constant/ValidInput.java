@@ -18,5 +18,4 @@ public class ValidInput {
                                                 .toArray(String[]::new);
 
     public static final String[] TWO_WAY_CHOICE = {"예", "아니오"};
-
 }

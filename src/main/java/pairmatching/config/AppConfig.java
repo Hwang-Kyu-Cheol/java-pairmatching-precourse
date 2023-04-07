@@ -4,8 +4,6 @@ import pairmatching.controller.FrontController;
 import pairmatching.controller.PairMatchingController;
 import pairmatching.repository.CrewRepository;
 import pairmatching.repository.MatchingResultRepository;
-import pairmatching.repository.MissionRepository;
-import pairmatching.repository.PairHistoryRepository;
 import pairmatching.service.PairMatchingService;
 import pairmatching.util.Input;
 import pairmatching.util.InputResolver;
