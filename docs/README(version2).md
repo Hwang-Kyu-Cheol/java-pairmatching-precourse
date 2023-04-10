@@ -47,6 +47,7 @@
 #### 1. PairMatchingService 핵심 기능
 * Method : matchPair(Course course, Level level, Mission mission)
   * 설명 : 코스, 레벨, 미션에 따른 새롭게 매칭된 결과 반환. 
+    이전에 매칭된 결과가 있다면, 이전 매칭 결과를 지우고 새롭게 매칭.
     3번까지 매칭이 안될 경우, IllegalStateException 던짐.
 * Method : findPair(Course course, Level level, Mission mission)
   * 설명 : 코스, 레벨, 미션에 따른 이전에 매칭된 결과를 반환.

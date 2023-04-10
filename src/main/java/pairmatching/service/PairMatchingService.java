@@ -10,7 +10,6 @@ import pairmatching.repository.MatchingResultRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class PairMatchingService {
 
@@ -32,11 +31,8 @@ public class PairMatchingService {
      * @throws IllegalStateException 3번까지 매칭되지 않을 경우 예외를 던집니다.
      */
     public MatchingResult matchPair(Course course, Level level, Mission mission) throws IllegalStateException {
+        deleteMatchingResult(course, level, mission);
         MatchingResult matchingResult = createMatchingResult(course, level, mission);
-        Optional<MatchingResult> oldMatchingResult = findPair(course, level, mission);
-        if (oldMatchingResult.isPresent()) {
-            return matchingResultRepository.update(oldMatchingResult.get().getIndex(), matchingResult);
-        }
         return matchingResultRepository.save(matchingResult);
     }
 
@@ -46,9 +42,10 @@ public class PairMatchingService {
      * @param level 레벨(LEVEL1, LEVEL2 ...)
      * @param mission 미션(자동차경주, 숫자야구게임 ...)
      * @return 해당 코스, 레벨, 미션에 따른 이전에 매칭된 결과를 반환합니다.
+     * @throws IllegalStateException 이전에 매칭된 결과가 없을 경우 예외를 던집니다.
      */
-    public Optional<MatchingResult> findPair(Course course, Level level, Mission mission) {
-        return matchingResultRepository.findByCourseAndLevelAndMission(course, level, mission);
+    public MatchingResult findPair(Course course, Level level, Mission mission) throws IllegalStateException {
+        return matchingResultRepository.findByCourseAndLevelAndMission(course, level, mission).orElseThrow(IllegalStateException::new);
     }
 
     /**
@@ -108,5 +105,10 @@ public class PairMatchingService {
             pairs.get(pairs.size() - 1).add(pair.get(0));
         }
         return pairs;
+    }
+
+    private void deleteMatchingResult(Course course, Level level, Mission mission) {
+        matchingResultRepository.findByCourseAndLevelAndMission(course, level, mission)
+                .ifPresent(matchingResult -> matchingResultRepository.delete(matchingResult.getIndex()));
     }
 }

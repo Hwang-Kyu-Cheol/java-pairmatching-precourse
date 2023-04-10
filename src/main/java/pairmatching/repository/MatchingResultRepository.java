@@ -28,6 +28,10 @@ public class MatchingResultRepository {
         return matchingResult;
     }
 
+    public void delete(Long index) {
+        store.remove(index);
+    }
+
     public List<MatchingResult> findByLevel(Level level) {
         return store.values()
                 .stream()
