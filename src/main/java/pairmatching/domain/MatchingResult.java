@@ -43,4 +43,15 @@ public class MatchingResult {
     public List<Pair> getPairs() {
         return pairs;
     }
+
+    public boolean contains(Pair other) {
+        for (Pair self : pairs) {
+            Pair big = (self.size() > other.size()) ? self : other;
+            Pair small = (self.size() <= other.size()) ? self : other;
+            if (big.containsAll(small)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

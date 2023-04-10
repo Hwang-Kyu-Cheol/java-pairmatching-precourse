@@ -31,12 +31,11 @@ public class Pair {
         return crewNames.isEmpty();
     }
 
-    public List<String> getCrewList() {
+    public List<String> getCrewNames() {
         return crewNames;
     }
 
     public boolean containsAll(Pair pair) {
-        ArrayList<String> arr = new ArrayList<>();
-        arr.containsAll()
+        return crewNames.containsAll(pair.getCrewNames());
     }
 }

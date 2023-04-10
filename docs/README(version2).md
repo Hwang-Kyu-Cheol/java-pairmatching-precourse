@@ -44,9 +44,13 @@
   * store : index(key)에 따라 매칭된 결과(value)가 저장되는 공간
 - - -
 ## Service
-#### 1. PairMatchingService
+#### 1. PairMatchingService 핵심 기능
 * Method : matchPair(Course course, Level level, Mission mission)
-  * matchPair
-    * 설명 : 코스, 레벨, 미션에 따른 매칭된 결과 반환. 
-    3번까지 매칭이 안될 경우 exception 던짐.
+  * 설명 : 코스, 레벨, 미션에 따른 새롭게 매칭된 결과 반환. 
+    3번까지 매칭이 안될 경우, IllegalStateException 던짐.
+* Method : findPair(Course course, Level level, Mission mission)
+  * 설명 : 코스, 레벨, 미션에 따른 이전에 매칭된 결과를 반환.
+    매칭된 결과가 없다면, IllegalStateException 던짐.
+* Method : resetPair()
+  * 설명 : 이전에 매칭된 모든 결과를 초기화.
     

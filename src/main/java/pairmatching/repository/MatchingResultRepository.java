@@ -14,11 +14,17 @@ import java.util.stream.Collectors;
 public class MatchingResultRepository {
 
     private static final Map<Long, MatchingResult> store = new HashMap<>();
-    private static long index = 0L;
+    private static long sequence = 0L;
 
     public MatchingResult save(MatchingResult matchingResult) {
-        matchingResult.setIndex(++index);
+        matchingResult.setIndex(++sequence);
         store.put(matchingResult.getIndex(), matchingResult);
+        return matchingResult;
+    }
+
+    public MatchingResult update(Long index, MatchingResult matchingResult) {
+        matchingResult.setIndex(index);
+        store.put(index, matchingResult);
         return matchingResult;
     }
 
@@ -36,16 +42,6 @@ public class MatchingResultRepository {
                                         && matchingResult.getLevel().equals(level)
                                         && matchingResult.getMission().equals(mission))
                 .findAny();
-    }
-
-    public void updateByCourseAndLevelAndMission(Course course, Level level, Mission mission, MatchingResult matchingResult) {
-        store.keySet()
-                .stream()
-                .filter(key -> store.get(key).getCourse().equals(course)
-                        && store.get(key).getLevel().equals(level)
-                        && store.get(key).getMission().equals(mission))
-                .findAny()
-                .ifPresent(key -> store.put(key, matchingResult));
     }
 
     public void clearStore() {
