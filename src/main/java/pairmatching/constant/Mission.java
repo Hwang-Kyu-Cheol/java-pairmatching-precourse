@@ -1,5 +1,8 @@
 package pairmatching.constant;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 /**
  *   - 레벨1: 자동차경주 | 로또 | 숫자야구게임
  *   - 레벨2: 장바구니 | 결제 | 지하철노선도
@@ -31,5 +34,11 @@ public enum Mission {
 
     public String getName() {
         return name;
+    }
+
+    public static Optional<Mission> findByName(String name) {
+        return Arrays.stream(values())
+                .filter(mission -> mission.getName().equals(name))
+                .findAny();
     }
 }

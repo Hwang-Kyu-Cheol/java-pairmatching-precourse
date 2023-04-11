@@ -56,7 +56,7 @@ public class PairMatchingService {
     }
 
     /** 비즈니스 로직 **/
-    public MatchingResult createMatchingResult(Course course, Level level, Mission mission) throws IllegalStateException {
+    private MatchingResult createMatchingResult(Course course, Level level, Mission mission) throws IllegalStateException {
         List<String> crewNames = crewRepository.findByCourse(course);
         for (int i = 0; i < MATCHING_LIMIT; i++) {
             List<Pair> pairs = makePairs(shuffleCrewNames(crewNames));

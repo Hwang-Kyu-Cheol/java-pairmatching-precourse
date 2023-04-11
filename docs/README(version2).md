@@ -54,4 +54,15 @@
     매칭된 결과가 없다면, IllegalStateException 던짐.
 * Method : resetPair()
   * 설명 : 이전에 매칭된 모든 결과를 초기화.
-    
+- - -
+## Util
+#### 1. InputValidator
+* Method : validateSelectingFunctionInput(String input)
+  * 설명 : 기능을 선택할 때 input이 유효한지 판단하는 함수.
+    유효하지 않을 경우, IllegalArgumentException 던짐.
+* Method : validateSelectingCourseLevelMissionInput(String input)
+  * 설명 : (코스, 레벨, 미션)을 선택할 때 input이 유효한지 판단하는 함수.
+    유효하지 않을 경우, IllegalArgumentException 던짐.
+* Method : validateSelectingRematchInput(String input)
+  * 설명 : 재매치를 선택할 때 input이 유효한지 판단하는 함수.
+    유효하지 않을 경우, IllegalArgumentException 던짐.
