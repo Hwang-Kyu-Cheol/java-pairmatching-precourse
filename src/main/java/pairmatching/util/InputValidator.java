@@ -2,13 +2,12 @@ package pairmatching.util;
 
 import pairmatching.constant.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class InputValidator {
 
-    private static final String delimiter = ", ";
+    private static final String DELIMITER = ", ";
 
     /**
      * 문자열이 유효한 기능 선택인지 판단합니다.
@@ -56,6 +55,6 @@ public class InputValidator {
     }
 
     private static List<String> splitByDelimiter(String input) {
-        return Arrays.asList(input.split(delimiter));
+        return Arrays.asList(input.split(DELIMITER));
     }
 }

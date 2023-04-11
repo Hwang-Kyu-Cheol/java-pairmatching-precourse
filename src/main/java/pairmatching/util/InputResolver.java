@@ -8,14 +8,7 @@ import java.util.List;
 
 public class InputResolver {
 
-    private final InputValidator inputValidator;
-    private final MissionRepository missionRepository;
-    private static final String delimiter = ", ";
-
-    public InputResolver(InputValidator inputValidator, MissionRepository missionRepository) {
-        this.inputValidator = inputValidator;
-        this.missionRepository = missionRepository;
-    }
+    private static final String DELIMITER = ", ";
 
     /**
      * 기능을 선택할 때 입력을 validate하고, 입력을 반환합니다.
@@ -68,6 +61,6 @@ public class InputResolver {
     }
 
     private List<String> splitByDelimiter(String input) {
-        return Arrays.asList(input.split(delimiter));
+        return Arrays.asList(input.split(DELIMITER));
     }
 }
