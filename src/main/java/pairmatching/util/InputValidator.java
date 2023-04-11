@@ -15,9 +15,8 @@ public class InputValidator {
      * @throws IllegalArgumentException 문자열이 유효하지 않을 경우 예외를 던집니다.
      */
     public static void validateSelectingFunctionInput(String input) throws IllegalArgumentException {
-        if (!ValidInput.FUNCTION.contains(input)) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_FORM.getValue());
-        }
+        Function.findByValue(input)
+                .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.INVALID_FORM.getValue()));
     }
 
     /**
@@ -36,9 +35,8 @@ public class InputValidator {
      * @throws IllegalArgumentException 문자열이 유효하지 않을 경우 예외를 던집니다.
      */
     public static void validateSelectingRematchInput(String input) throws IllegalArgumentException {
-        if (!ValidInput.TWO_WAY_CHOICE.contains(input)) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_FORM.getValue());
-        }
+        TwoWayChoice.findByValue(input)
+                .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.INVALID_FORM.getValue()));
     }
 
     /** 비즈니스 로직 **/

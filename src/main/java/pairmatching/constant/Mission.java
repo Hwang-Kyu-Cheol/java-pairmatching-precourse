@@ -32,6 +32,10 @@ public enum Mission {
         this.name = name;
     }
 
+    public Level getLevel() {
+        return level;
+    }
+
     public String getName() {
         return name;
     }
@@ -39,6 +43,12 @@ public enum Mission {
     public static Optional<Mission> findByName(String name) {
         return Arrays.stream(values())
                 .filter(mission -> mission.getName().equals(name))
+                .findAny();
+    }
+
+    public static Optional<Mission> findByLevelAndName(Level level, String name) {
+        return Arrays.stream(values())
+                .filter(mission -> mission.getLevel().equals(level) && mission.getName().equals(name))
                 .findAny();
     }
 }

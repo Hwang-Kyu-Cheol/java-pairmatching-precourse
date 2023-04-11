@@ -18,12 +18,15 @@
 * Field : Course course, String filePath
   * course : BACKEND, FRONTEND
   * filePath : 파일위치(ex. "src/main/resources/frontend-crew.md")
-#### 5. 유효한 사용자 입력 종류
-* 기능 선택 입력 : [1,2,3,Q]
-* 과정 입력 : [프론트엔드, 백엔드]
-* 레벨 입력 : [레벨1, 레벨2, ...]
-* 미션 입력 : [자동차경주, 로또, 숫자야구게임, ...]
-* 양자택일 입력 : [예, 아니오]
+#### 5. ErrorMessage
+* Field : String value
+  * value : 에러 메시지
+#### 6. Function
+* Field : String value
+  * value : "1", "2", "3", "Q"
+#### 7. TwoWayChoice
+* Field : String value
+  * value : "네", "아니오"
 - - -
 ## Domain
 #### 1. Pair : 두명 또는 세명이 된 페어
@@ -66,3 +69,12 @@
 * Method : validateSelectingRematchInput(String input)
   * 설명 : 재매치를 선택할 때 input이 유효한지 판단하는 함수.
     유효하지 않을 경우, IllegalArgumentException 던짐.
+#### 2. InputResolver
+* Method : resolveSelectingFunctionInput(String input)
+  * 설명 : 기능 선택 입력을 validate하고, Function enum으로 반환하는 함수.
+* Method : resolveSelectingCourseLevelMissionInput(String input)
+  * 설명 : (코스, 레벨, 미션) 선택 입력을 validate하고, 입력을
+  CourseLevelMission 객체로 반환하는 함수.
+* Method : resolveSelectingRematchInput(String input)
+  * 설명 : 재미치 선택 입력을 validate하고, 입력을 TwoWayChoice enum으로 
+  반환하는 함수.
