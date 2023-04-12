@@ -5,7 +5,6 @@ import pairmatching.controller.PairMatchingController;
 import pairmatching.repository.CrewRepository;
 import pairmatching.repository.MatchingResultRepository;
 import pairmatching.service.PairMatchingService;
-import pairmatching.util.Input;
 import pairmatching.util.InputResolver;
 import pairmatching.util.InputValidator;
 

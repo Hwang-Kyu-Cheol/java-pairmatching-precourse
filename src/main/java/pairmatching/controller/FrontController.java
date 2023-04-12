@@ -1,7 +1,5 @@
 package pairmatching.controller;
 
-import pairmatching.util.Input;
-
 public class FrontController {
 
     private final Input input;

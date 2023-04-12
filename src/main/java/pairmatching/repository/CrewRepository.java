@@ -15,17 +15,18 @@ public class CrewRepository {
                 .forEach((nameList) -> register(nameList));
     }
 
-    private void register(NameList nameList) {
-        Course course = nameList.getCourse();
-        List<String> names = FileReader.readFile(nameList.getFilePath());
-        save(course, names);
-    }
-
     public void save(Course course, List<String> names) {
         store.put(course, names);
     }
 
     public List<String> findByCourse(Course course) {
         return store.get(course);
+    }
+
+    /** 비즈니스 로직 **/
+    private void register(NameList nameList) {
+        Course course = nameList.getCourse();
+        List<String> names = FileReader.readFile(nameList.getFilePath());
+        save(course, names);
     }
 }

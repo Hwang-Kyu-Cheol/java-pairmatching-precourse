@@ -6,6 +6,8 @@ import java.util.List;
 
 public class Display {
 
+    private static final String ERROR = "[ERROR]";
+
     public static void displaySelectingFunction() {
         System.out.println("기능을 선택하세요.");
         System.out.println("1. 페어 매칭");
@@ -50,25 +52,15 @@ public class Display {
         System.out.println();
     }
 
-    public static void displayInputError() {
-        System.out.println("[ERROR] 입력이 올바르지 않습니다.");
-        System.out.println();
+    public static void displayError(Exception e) {
+        System.out.println(ERROR + e.getMessage());
     }
 
-    public static void displayMatchPairError() {
-        System.out.println("[ERROR] 페어를 매칭할 수 없습니다.");
-        System.out.println();
-    }
-
-    public static void displayFindPairError() {
-        System.out.println("[ERROR] 매칭 이력이 없습니다.");
-        System.out.println();
-    }
-
+    /** 비즈니스 로직 **/
     private static void displayPair(Pair pair) {
         for (int i = 0; i < pair.size() - 1; i++) {
-            System.out.print(pair.get(i).getName() + " : ");
+            System.out.print(pair.get(i) + " : ");
         }
-        System.out.print(pair.get(pair.size() - 1).getName());
+        System.out.print(pair.get(pair.size() - 1));
     }
 }

@@ -78,3 +78,10 @@
 * Method : resolveSelectingRematchInput(String input)
   * 설명 : 재미치 선택 입력을 validate하고, 입력을 TwoWayChoice enum으로 
   반환하는 함수.
+#### 3. Display
+* 설명 : 화면에 보여지는 문자열을 보여주는 Util 클래스.
+#### 4. FileReader
+* 설명 : 주어지는 명단의 이름을 리스트로 변환해주는 Util 클래스.
+#### 5. InputHandler
+* 설명 : 유효한 입력을 받을 때까지 입력을 받고, 유효하지
+않은 경우에는 에러 메시지를 출력하는 Util 클래스.

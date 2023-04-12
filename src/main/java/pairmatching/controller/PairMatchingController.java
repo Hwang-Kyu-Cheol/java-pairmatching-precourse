@@ -5,7 +5,6 @@ import pairmatching.constant.Level;
 import pairmatching.domain.*;
 import pairmatching.service.PairMatchingService;
 import pairmatching.util.Display;
-import pairmatching.util.Input;
 
 import java.util.Optional;
 

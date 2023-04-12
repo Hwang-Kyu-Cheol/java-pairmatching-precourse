@@ -10,8 +10,7 @@ public class FileReader {
         try {
             return Files.readAllLines(Paths.get(filePath));
         } catch (IOException e) {
-            e.printStackTrace();
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(e);
         }
     }
 }
