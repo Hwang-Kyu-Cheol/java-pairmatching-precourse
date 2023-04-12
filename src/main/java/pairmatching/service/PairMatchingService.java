@@ -2,6 +2,7 @@ package pairmatching.service;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import pairmatching.constant.Course;
+import pairmatching.constant.ErrorMessage;
 import pairmatching.constant.Level;
 import pairmatching.constant.Mission;
 import pairmatching.domain.*;
@@ -45,7 +46,8 @@ public class PairMatchingService {
      * @throws IllegalStateException 이전에 매칭된 결과가 없을 경우 예외를 던집니다.
      */
     public MatchingResult findPair(Course course, Level level, Mission mission) throws IllegalStateException {
-        return matchingResultRepository.findByCourseAndLevelAndMission(course, level, mission).orElseThrow(IllegalStateException::new);
+        return matchingResultRepository.findByCourseAndLevelAndMission(course, level, mission)
+                .orElseThrow(() -> new IllegalStateException(ErrorMessage.NOT_EXIST_MATCHING_RESULT.getValue()));
     }
 
     /**
@@ -65,7 +67,7 @@ public class PairMatchingService {
             }
             return new MatchingResult(course, level, mission, pairs);
         }
-        throw new IllegalStateException();
+        throw new IllegalStateException(ErrorMessage.FAIL_MATCHING.getValue());
     }
 
     private boolean isValidPairs(Level level, List<Pair> pairs) {

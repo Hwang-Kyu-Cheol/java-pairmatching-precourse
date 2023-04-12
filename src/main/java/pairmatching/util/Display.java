@@ -1,5 +1,6 @@
 package pairmatching.util;
 
+import pairmatching.domain.MatchingResult;
 import pairmatching.domain.Pair;
 
 import java.util.List;
@@ -33,9 +34,9 @@ public class Display {
         System.out.println("ex) 백엔드, 레벨1, 자동차경주");
     }
 
-    public static void displayMatchingResult(List<Pair> pairList) {
+    public static void displayMatchingResult(MatchingResult matchingResult) {
         System.out.println("페어 매칭 결과입니다.");
-        for (Pair pair : pairList) {
+        for (Pair pair : matchingResult.getPairs()) {
             displayPair(pair);
             System.out.println();
         }

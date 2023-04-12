@@ -1,30 +1,37 @@
 package pairmatching.controller;
 
+import pairmatching.constant.Function;
+import pairmatching.util.Display;
+import pairmatching.util.InputHandler;
+
 public class FrontController {
 
-    private final Input input;
     private final PairMatchingController pairMatchingController;
 
-    public FrontController(Input input, PairMatchingController pairMatchingController) {
-        this.input = input;
+    public FrontController(PairMatchingController pairMatchingController) {
         this.pairMatchingController = pairMatchingController;
     }
 
     public void run() {
         while (true) {
-            String str = input.selectFunction();
-            if (str.equals("Q")) {
-                return;
+            Display.displaySelectingFunction();
+            Function input = InputHandler.selectFunction();
+            if (input.equals(Function.QUIT)) {
+                break;
             }
-            if (str.equals("1")) {
-                pairMatchingController.matchPair();
-            }
-            if (str.equals("2")) {
-                pairMatchingController.findPair();
-            }
-            if (str.equals("3")) {
-                pairMatchingController.resetPair();
-            }
+            start(input);
+        }
+    }
+
+    public void start(Function input) {
+        if (input.equals(Function.MATCH_PAIR)) {
+            pairMatchingController.matchPair();
+        }
+        if (input.equals(Function.FIND_PAIR)) {
+            pairMatchingController.findPair();
+        }
+        if (input.equals(Function.RESET_PAIR)) {
+            pairMatchingController.resetPair();
         }
     }
 }
