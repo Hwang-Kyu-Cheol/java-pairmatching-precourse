@@ -1,7 +1,5 @@
 package pairmatching.constant;
 
-import pairmatching.constant.Course;
-
 public enum NameList {
     FRONTEND_NAMELIST(Course.FRONTEND, "src/main/resources/frontend-crew.md"),
     BACKEND_NAMELIST(Course.BACKEND, "src/main/resources/backend-crew.md");

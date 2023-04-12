@@ -1,62 +1,69 @@
 package pairmatching.controller;
 
-import pairmatching.constant.Course;
-import pairmatching.constant.Level;
+import pairmatching.constant.TwoWayChoice;
 import pairmatching.domain.*;
 import pairmatching.service.PairMatchingService;
 import pairmatching.util.Display;
-
-import java.util.Optional;
+import pairmatching.util.InputHandler;
 
 public class PairMatchingController {
 
-    private final Input input;
     private final PairMatchingService pairMatchingService;
 
-    public PairMatchingController(Input input, PairMatchingService pairMatchingService) {
-        this.input = input;
+    public PairMatchingController(PairMatchingService pairMatchingService) {
         this.pairMatchingService = pairMatchingService;
     }
 
     public void matchPair() {
-        CourseLevelMission courseLevelMission;
-        Course course;
-        Level level;
-        Mission mission;
         Display.displayCourseLevelMission();
-        while (true) {
-            courseLevelMission = input.selectCourseLevelMission();
-            course = courseLevelMission.getCourse();
-            level = courseLevelMission.getLevel();
-            mission = courseLevelMission.getMission();
-            if (!pairMatchingService.findPair(course, level, mission).isPresent() || input.selectRematch()) {
-                break;
-            }
+        CourseLevelMission input = getCourseLevelMission();
+        try {
+            MatchingResult matchingResult = pairMatchingService.matchPair(input.getCourse(), input.getLevel(), input.getMission());
+            Display.displayMatchingResult(matchingResult);
+        } catch (IllegalStateException e) {
+            Display.displayError(e);
         }
-        Optional<MatchingResult> matchingResult = pairMatchingService.matchPair(course, level, mission);
-        if (!matchingResult.isPresent()) {
-            Display.displayMatchPairError();
-            return;
-        }
-        Display.displayMatchingResult(matchingResult.get().getPairList());
     }
 
     public void findPair() {
         Display.displayCourseLevelMission();
-        CourseLevelMission courseLevelMission = input.selectCourseLevelMission();
-        Course course = courseLevelMission.getCourse();
-        Level level = courseLevelMission.getLevel();
-        Mission mission = courseLevelMission.getMission();
-        Optional<MatchingResult> matchingResult = pairMatchingService.findPair(course, level, mission);
-        if (!matchingResult.isPresent()) {
-            Display.displayFindPairError();
-            return;
+        Display.displaySelectingCourseLevelMission();
+        CourseLevelMission input = InputHandler.selectCourseLevelMission();
+        try {
+            MatchingResult matchingResult = pairMatchingService.findPair(input.getCourse(), input.getLevel(), input.getMission());
+            Display.displayMatchingResult(matchingResult);
+        } catch (IllegalStateException e) {
+            Display.displayError(e);
         }
-        Display.displayMatchingResult(matchingResult.get().getPairList());
     }
 
     public void resetPair() {
         pairMatchingService.resetPair();
         Display.displayResetting();
+    }
+
+    /** 비즈니스 로직 **/
+    private CourseLevelMission getCourseLevelMission() {
+        while (true) {
+            Display.displaySelectingCourseLevelMission();
+            CourseLevelMission input = InputHandler.selectCourseLevelMission();
+            try {
+                pairMatchingService.findPair(input.getCourse(), input.getLevel(), input.getMission());
+            } catch (IllegalStateException e) {
+                return input;
+            }
+            if (wantToRematch()) {
+                return input;
+            }
+        }
+    }
+
+    private boolean wantToRematch() {
+        Display.displaySelectingRematch();
+        TwoWayChoice input = InputHandler.selectRematch();
+        if (input.equals(TwoWayChoice.YES)) {
+            return true;
+        }
+        return false;
     }
 }

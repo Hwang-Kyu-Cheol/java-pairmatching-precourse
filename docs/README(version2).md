@@ -85,3 +85,10 @@
 #### 5. InputHandler
 * 설명 : 유효한 입력을 받을 때까지 입력을 받고, 유효하지
 않은 경우에는 에러 메시지를 출력하는 Util 클래스.
+- - -
+## Controller
+#### 1. FrontController
+* 설명 : 처음 기능을 입력받고, 그에 따른 PairMatchingController의
+메소드를 실행하는 클래스
+#### 2. PairMatchingController
+* 설명 : 기능의 화면과 입력을 받고, 해당 기능을 실행하는 클래스
